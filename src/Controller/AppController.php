@@ -15,6 +15,7 @@ class AppController extends Controller
     {
         return $this->render('app/index.html.twig', [
             'photos' => $this->getDoctrine()->getRepository(Photo::class)->findAll(),
+            'rootDir' => $this->container->get('kernel')->getRootDir(),
             'controller_name' => 'AppController',
         ]);
     }
