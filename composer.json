@@ -36,6 +36,7 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "symfony/dotenv": "^4.1",
+        "symfony/maker-bundle": "^1.5",
         "symfony/test-pack": "^1.0",
         "symfony/web-server-bundle": "^4.1"
     },
