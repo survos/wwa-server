@@ -1,19 +1,53 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block stylesheets %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="/css/gallery.css" rel="stylesheet" id="bootstrap-css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
 <div class="example-wrapper">
-    <h1>Photos</h1>
+    <h1>Rapp Who We Are</h1>
+    <div class="container">
+        <div id="carousel">
+
+            {% for image in photos %}
+            <figure>
+                <a href="{{ path('photo_detail', {id: image.id}) }}">
+                    <img src="{{ asset('images/' ~ image.filename) | imagine_filter('squared_thumbnail') }}" alt="{{ image.filename }}"></figure>
+                </a>
+            {% endfor %}
+            {#
+            <figure><img src="http://lorempixel.com/186/116/nature/2" alt=""></figure>
+            <figure><img src="http://lorempixel.com/186/116/nature/3" alt=""></figure>
+            <figure><img src="http://lorempixel.com/186/116/nature/4" alt=""></figure>
+            <figure><img src="http://lorempixel.com/186/116/nature/5" alt=""></figure>
+            <figure><img src="http://lorempixel.com/186/116/nature/6" alt=""></figure>
+            <figure><img src="http://lorempixel.com/186/116/nature/7" alt=""></figure>
+            <figure><img src="http://lorempixel.com/186/116/nature/8" alt=""></figure>
+            <figure><img src="http://lorempixel.com/186/116/people/9" alt=""></figure>
+            #}
+        </div>
+    </div>
+
 
     There are {{ photos|length }} photos in the database.
 
 
+    {% for image in photos %}
+    <a href="{{ path('photo_detail', {id: image.id}) }}">
+
+    <img alt="{{ image.filename }}" title="{{ asset(image.filename) }}" src="{{ asset('images/' ~ image.filename) | imagine_filter('squared_thumbnail') }}" />
+    </a>
+        <br />
+    {% endfor %}
 
         <a href="{{ path('easyadmin') }}" class="btn btn-lg">
             <button>

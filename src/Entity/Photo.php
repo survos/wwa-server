@@ -38,9 +38,15 @@ class Photo
      */
     private $locations;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $mural = false;
+
     public function __construct()
     {
         $this->locations = new ArrayCollection();
+        $this->setMural(false);
     }
 
     public function getId()
@@ -111,6 +117,18 @@ class Photo
                 $location->setPhoto(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMural(): ?bool
+    {
+        return $this->mural;
+    }
+
+    public function setMural(bool $mural): self
+    {
+        $this->mural = $mural;
 
         return $this;
     }

@@ -9,8 +9,15 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class AppFixtures extends Fixture
 {
+
+    public function __construct()
+    {
+        // load the kernel here?
+    }
+
     public function load(ObjectManager $manager)
     {
+
         for ($i=0; $i<10; $i++) {
             $photo = new Photo();
             $photo->setFilename("file" . $i . '.jpg')

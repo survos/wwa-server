@@ -1,7 +1,13 @@
 easy_admin:
+    design:
+      menu:
+        - { label: 'Homepage', route: home, rel: 'index' }
+        - Photo
     entities:
-#        # List the entity class name you want to manage
-        - App\Entity\Location
-        - App\Entity\Photo
-#        - App\Entity\Category
-#        - App\Entity\User
+      Photo:
+        class: App\Entity\Photo
+        list:
+           fields:
+             - { label: 'image', property: 'filename', type: 'image', base_path: '/images/' }
+             - title
+             - mural
