@@ -1,19 +1,22 @@
 {
     "type": "project",
-    "license": "proprietary",
+    "license": "mit",
     "require": {
-        "php": "^7.1.3",
+        "php": "^7.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-pdo_pgsql": "*",
         "ext-pdo_sqlite": "*",
+        "ext-imagick": "*",
         "easycorp/easyadmin-bundle": "^1.17",
+        "liip/imagine-bundle": "^2.1",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "^4.1",
         "symfony/console": "^4.1",
         "symfony/debug-pack": "*",
         "symfony/expression-language": "^4.1",
+        "symfony/finder": "^4.1",
         "symfony/flex": "^1.0",
         "symfony/form": "^4.1",
         "symfony/framework-bundle": "^4.1",
@@ -33,7 +36,7 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "symfony/dotenv": "^4.1",
-        "symfony/maker-bundle": "^1.0",
+        "symfony/maker-bundle": "^1.5",
         "symfony/test-pack": "^1.0",
         "symfony/web-server-bundle": "^4.1"
     },

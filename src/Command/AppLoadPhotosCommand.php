@@ -53,6 +53,7 @@ class AppLoadPhotosCommand extends ContainerAwareCommand
             }
 
             $exifData = exif_read_data( $file->getPathname() );
+            dump($exifData); die();
 
             $photo
                 ->setTitle("Photo " . $file->getBasename('jpg'))

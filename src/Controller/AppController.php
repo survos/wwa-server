@@ -19,4 +19,15 @@ class AppController extends Controller
             'controller_name' => 'AppController',
         ]);
     }
+
+    /**
+     * @Route("/photo/{id}", name="photo_detail")
+     */
+    public function photo(Photo $photo)
+    {
+        return $this->render('app/photo.html.twig', [
+            'photo' => $photo
+        ]);
+    }
+
 }
