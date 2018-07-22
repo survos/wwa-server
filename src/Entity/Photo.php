@@ -43,6 +43,16 @@ class Photo
      */
     private $mural = false;
 
+    /**
+     * @ORM\Column(type="blob", nullable=true)
+     */
+    private $jpegData;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $url;
+
     public function __construct()
     {
         $this->locations = new ArrayCollection();
@@ -129,6 +139,30 @@ class Photo
     public function setMural(bool $mural): self
     {
         $this->mural = $mural;
+
+        return $this;
+    }
+
+    public function getJpegData()
+    {
+        return $this->jpegData;
+    }
+
+    public function setJpegData($jpegData): self
+    {
+        $this->jpegData = $jpegData;
+
+        return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(?string $url): self
+    {
+        $this->url = $url;
 
         return $this;
     }
