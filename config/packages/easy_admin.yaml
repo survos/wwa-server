@@ -10,4 +10,5 @@ easy_admin:
            fields:
              - { label: 'image', property: 'filename', type: 'image', base_path: '/images/' }
              - title
+             - description
              - mural

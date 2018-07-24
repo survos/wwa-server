@@ -13,10 +13,9 @@ class AppController extends Controller
      */
     public function index()
     {
-        return $this->render('app/index.html.twig', [
+        $template = 'unite-demo.html.twig'; // app/index.html.twig
+        return $this->render($template, [
             'photos' => $this->getDoctrine()->getRepository(Photo::class)->findAll(),
-            'rootDir' => $this->container->get('kernel')->getRootDir(),
-            'controller_name' => 'AppController',
         ]);
     }
 

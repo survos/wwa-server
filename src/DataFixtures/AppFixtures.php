@@ -18,6 +18,8 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
 
+        $photo = null;
+
         for ($i=0; $i<10; $i++) {
             $photo = new Photo();
             $photo->setFilename("file" . $i . '.jpg')

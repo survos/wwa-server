@@ -12,6 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class AppLoadPhotosCommand extends ContainerAwareCommand
 {
@@ -30,7 +31,7 @@ class AppLoadPhotosCommand extends ContainerAwareCommand
         $this
             ->setDescription('Add a short description for your command')
             ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
-            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
+            ->addOption('purge', null, InputOption::VALUE_NONE, 'Purge first')
         ;
     }
 
@@ -39,11 +40,21 @@ class AppLoadPhotosCommand extends ContainerAwareCommand
         $io = new SymfonyStyle($input, $output);
         $repo = $this->em->getRepository(Photo::class);
 
+        if ($input->getOption('purge')) {
+            array_map(function (Photo $p) {
+                $this->em->remove($p);
+            }, $repo->findAll() );
+            $this->em->flush();
+        }
+
 
         $finder = new Finder();
+
+        /** @var KernelInterface $kernel */
+        $kernel = $this->getContainer()->get('kernel');
         $c = 0;
         /** @var SplFileInfo $file */
-        foreach ($finder->files()->in($this->getContainer()->get('kernel')->getProjectDir() . '/public/images') as $file) {
+        foreach ($finder->files()->in($kernel->getProjectDir() . '/public/images') as $file) {
             $c++;
             $filename = $file->getBasename();
             if (!$photo = $repo->findOneBy(['filename' => $filename])) {
@@ -53,11 +64,12 @@ class AppLoadPhotosCommand extends ContainerAwareCommand
             }
 
             $exifData = exif_read_data( $file->getPathname() );
-            dump($exifData); die();
+
+            // dump($exifData); die();
 
             $photo
-                ->setTitle("Photo " . $file->getBasename('jpg'))
-                ->setDescription("Description of photo ");
+                ->setTitle("Photo " . $file->getBasename('jpeg'))
+                ->setDescription($exifData['ImageDescription'] ?? 'missing description');
 
 
         }
